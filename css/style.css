@@ -1,0 +1,42 @@
+.navbar-nav {
+	text-align:center !important;
+}
+.main-header {
+	margin-top:60px;
+}
+.card-header h4 {  
+	display:inline-block;
+	min-height:84px !important;
+}
+.pricing-card-title {
+	min-height:60px;
+}
+.list-unstyled li {
+	text-align:left;
+}
+
+.reveal,
+.reveal2,
+.reveal3 {   
+	display:none;
+	position:relative;
+	top:-400px;
+	z-index:2000;
+	width:50%;
+	margin:0 auto;
+	margin-top:-600px;
+	background:#fff;
+	padding:30px 50px;
+	border:1px solid #ccc;
+	box-shadow:3px 3px 3px #999;
+}
+
+.close {
+	float:right;
+	font-size:30px;
+	cursor:pointer;
+}
+
+.form-group {
+	text-align:center;
+}
