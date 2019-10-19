@@ -127,7 +127,7 @@
 		
 		<br/>
 				
-		<button type="submit" class="btn btn-run btn-success">Понеслась!</button>
+		<button type="submit" class="btn btn-run btn-success">Отправить</button>
 		<button type="button" class="btn btn-close btn-secondary">Закрыть</button>		
 	</form>
 </div>
@@ -167,7 +167,7 @@
 		
 		<br/>
 				
-		<button type="submit" class="btn btn-run btn-success">Понеслась!</button>
+		<button type="submit" class="btn btn-run btn-success">Отправить</button>
 		<button type="button" class="btn btn-close btn-secondary">Закрыть</button>		
 	</form>
 </div>
@@ -207,7 +207,7 @@
 		
 		<br/>
 				
-		<button type="submit" class="btn btn-run btn-success">Понеслась!</button>
+		<button type="submit" class="btn btn-run btn-success">Отправить</button>
 		<button type="button" class="btn btn-close btn-secondary">Закрыть</button>		
 	</form>
 </div>

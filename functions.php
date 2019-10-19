@@ -1,7 +1,5 @@
 <?php 
 
-// $logger = Logger::get_logger( realpath(dirname(__FILE__)) );
-
 function task1($params = null) {
 
 	$sql = "SELECT `dst`, COUNT(`src`) as `touches`
@@ -9,9 +7,6 @@ FROM `cdr`
 WHERE LEFT(`dst`,9) = '781267002'
 AND `calldate` > '".$params['start-date']."' AND `calldate` < '".$params['end-date']."' 
 GROUP by `dst`";
-	
-	// 1. SELECT `dst`, COUNT(`src`) as `touches` FROM `cdr` WHERE LEFT(`dst`,9) = '781267002' GROUP by `dst` AND date запрос на получение кол-ва уникальных за период группа по всем линииям!
-    // 2. SELECT `src` , COUNT(`src`) AS `touches` FROM `cdr` WHERE `dst` = '78126700220' AND LENGTH(`src`) > 6 GROUP BY `src` Запрос на получение количества звонков от каждого абонента по выбранной 
 		
 	$res = DbCDRHandler::getAll($sql);
 	
@@ -49,14 +44,16 @@ GROUP BY `dst`";
 
 	$res = DbCDRHandler::getAll($sql);
 	
-	$out = '<table class="table table-striped"><thead>
+	$out = '<div class="pricing-header px-3 py-3 pt-md-4 pb-md-4 mx-auto text-center" data-task="task2" id="interval">
+				<span id="interval-start-date">'.$params['start-date'].'</span> - 
+				<span id="interval-end-date">'.$params['start-date'].'</span>
+			</div>
+	<table class="table table-striped"><thead>
     <tr>
       <th scope="col">#</th>
       <th scope="col">Dst</th>
       <th scope="col">Sum Calls</th>
     </tr></thead>';
-	
-	// exit(var_dump($res));
 	
 	$counter = 0;	
 	
@@ -92,8 +89,6 @@ GROUP BY `queuename`";
       <th scope="col">queuename</th>
       <th scope="col">Sum Calls</th>
     </tr></thead>';
-	
-	// exit(var_dump($res));
 	
 	$counter = 0;	
 	
@@ -183,7 +178,6 @@ GROUP BY `src`";
 	return $out;		
 	
 }
-
 
 function getTestResult($params = null) {
 	
