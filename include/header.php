@@ -5,11 +5,14 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<meta http-equiv="x-ua-compatible" content="ie=edge">
 
+	  <!-- Font Awesome -->
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
 	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css"  /> 
 	<link rel="stylesheet" type="text/css" href="css/dashboard.css"  /> 
 	<link rel="stylesheet" type="text/css" href="css/jquery.datetimepicker.min.css"/>
-	<link rel="stylesheet" type="text/css" href="css/style.css"/>	
-
+	<!-- MDBootstrap Datatables  -->
+	<link rel="stylesheet" type="text/css" href="vendor/mdb/css/addons/datatables.min.css"  />
+	<link rel="stylesheet" type="text/css" href="css/style.css"/>
 
 </head>
 <body>

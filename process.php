@@ -6,6 +6,8 @@
 	require 'class/DbCDRHandler.class.php';
 	require 'class/DbQStatHandler.class.php';
 	require 'functions.php';
+	
+	// echo '<pre>'; print_r($_POST);
 
 	$taskId = (int)$_POST['form-id'];
 	
@@ -38,9 +40,16 @@ require 'include/header.php';
 
 <?php require 'include/footer.php'; ?>
 
+
 <script>
 $(document).ready(function() {
 	
+	// Sort function for table 
+	$('#result-table').DataTable();
+	$('.dataTables_length').addClass('bs-select');
+	
+	
+	// Ajax call to import Excel file2
 	$('#exls-export').click(function() {
 		
 		var task      = $('#interval').data('task');
@@ -48,49 +57,29 @@ $(document).ready(function() {
 		var endDate   = $('#interval-end-date').text();
 
 		var params = { 
-			'task'      : task,
-			'startDate' : startDate,
-			'endDate'   : endDate			
+			'task'       : task,
+			'start-date' : startDate,
+			'end-date'   : endDate			
 		};
 		
 		$.ajax({
 			type: 'POST',
 			url: 'savexlsx.php',
 			data: params, 
-			// dataType: "json",
 			success: function(data){
 				$('.success-msg').animate({'opacity':'1'}, 1000);
 				$('.success-msg').html(data);
 				setTimeout(function() {
 					$('.success-msg').animate({'opacity':'0'}, 500);
-				}, 7000)
+				}, 15000)
 			},
 			error: function (xhr, ajaxOptions, thrownError) {
 				alert(xhr.status); alert(thrownError); 
 			},
 		});
-		
-		
-		// console.log(redirectUrl);		
-		return false;
-		
-	});	
 	
+		return false;
+	});	
 });
 
-
-
 </script>
-
-
-
-
-
-
-
-
-
-
-
-
-	

@@ -12,9 +12,6 @@ jQuery('document').ready(function() {
 	
 	
 	$('.reveal-form').submit(function() {
-	
-		// d1 = new Date($('#start-date').val());
-		// d2 = new Date($('#end-date').val());
 		
 		d1 = new Date($(this).find('.start-date').val());
 		d2 = new Date($(this).find('.end-date').val());

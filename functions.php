@@ -10,7 +10,11 @@ GROUP by `dst`";
 		
 	$res = DbCDRHandler::getAll($sql);
 	
-	$out = '<table class="table table-striped"><thead>
+	$out = '<div class="pricing-header px-3 py-3 pt-md-4 pb-md-4 mx-auto text-center" data-task="task1" id="interval">
+				<span id="interval-start-date">'.$params['start-date'].'</span> - 
+				<span id="interval-end-date">'.$params['end-date'].'</span>
+			</div>
+	<table id="result-table" class="table table-striped table-bordered table-sm"><thead>
     <tr>
       <th scope="col">#</th>
       <th scope="col">Dst</th>
@@ -42,13 +46,13 @@ JOIN `extension_plan` ON `cdr`.`dst`=`extension_plan`.`number`
 WHERE `calldate` > '".$params['start-date']."' AND `calldate` < '".$params['end-date']."' 
 GROUP BY `dst`";
 
-	$res = DbCDRHandler::getAll($sql);
+	$res = DbCDRHandler::getAll($sql);  
 	
 	$out = '<div class="pricing-header px-3 py-3 pt-md-4 pb-md-4 mx-auto text-center" data-task="task2" id="interval">
 				<span id="interval-start-date">'.$params['start-date'].'</span> - 
-				<span id="interval-end-date">'.$params['start-date'].'</span>
+				<span id="interval-end-date">'.$params['end-date'].'</span>
 			</div>
-	<table class="table table-striped"><thead>
+	<table id="result-table" class="table table-striped table-bordered table-sm"><thead>
     <tr>
       <th scope="col">#</th>
       <th scope="col">Dst</th>
@@ -69,7 +73,6 @@ GROUP BY `dst`";
 	$out .= '</table>';
 	
 	return $out;
-
 }
 
 
@@ -83,7 +86,11 @@ GROUP BY `queuename`";
 
 	$res = DbCDRHandler::getAll($sql);
 	
-	$out = '<table class="table table-striped"><thead>
+	$out = '<div class="pricing-header px-3 py-3 pt-md-4 pb-md-4 mx-auto text-center" data-task="task3" id="interval">
+				<span id="interval-start-date">'.$params['start-date'].'</span> - 
+				<span id="interval-end-date">'.$params['end-date'].'</span>
+			</div>
+	<table id="result-table" class="table table-striped table-bordered table-sm"><thead>
     <tr>
       <th scope="col">#</th>
       <th scope="col">queuename</th>
@@ -104,7 +111,6 @@ GROUP BY `queuename`";
 	$out .= '</table>';
 	
 	return $out;	
-	
 }
 
 function task4($params = null) {
@@ -117,7 +123,11 @@ GROUP BY `src`";
 	
 	$res = DbCDRHandler::getAll($sql);
 	
-	$out = '<table class="table table-striped"><thead>
+	$out = '<div class="pricing-header px-3 py-3 pt-md-4 pb-md-4 mx-auto text-center" data-task="task4" id="interval">
+				<span id="interval-start-date">'.$params['start-date'].'</span> - 
+				<span id="interval-end-date">'.$params['end-date'].'</span>
+			</div>
+	<table id="result-table" class="table table-striped table-bordered table-sm"><thead>
     <tr>
       <th scope="col">#</th>
       <th scope="col">src</th>
@@ -138,24 +148,23 @@ GROUP BY `src`";
 	$out .= '</table>';
 	
 	return $out;	
-	
 }
 
-function task5($params = null) {    // echo '<pre>'; exit(var_dump($params));    
+function task5($params = null) {   
 
 	$sql = "SELECT `src`, COUNT(`src`) AS `sum_calls` 
 FROM `cdr` 
 JOIN `extension_plan` ON `cdr`.`dst`=`extension_plan`.`number` 
 WHERE `calldate` > '".$params['start-date']."' AND `calldate` < '".$params['end-date']."' AND `queuename` = '".$params['queuename']."' AND `src` > 7 
 GROUP BY `src`";
-
-
 	
 	$res = DbCDRHandler::getAll($sql);
 	
-	// echo '<pre>'; exit(var_dump($res));
-	
-	$out = '<table class="table table-striped"><thead>
+	$out = '<div class="pricing-header px-3 py-3 pt-md-4 pb-md-4 mx-auto text-center" data-task="task5" id="interval">
+				<span id="interval-start-date">'.$params['start-date'].'</span> - 
+				<span id="interval-end-date">'.$params['end-date'].'</span>
+			</div>
+	<table id="result-table" class="table table-striped table-bordered table-sm"><thead>
     <tr>
       <th scope="col">#</th>
       <th scope="col">src</th>
