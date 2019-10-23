@@ -11,6 +11,8 @@
 	define('DB_SERVER', 'localhost');
 	define('DB_USERNAME', 'root');
 	define('DB_PASSWORD', '');
+	// define('DB_USERNAME', 'GlauRunG');
+	// define('DB_PASSWORD', 'Bo0s$MetalZ0ne');
 	
 	define('DB_DATABASE_PBX',   'pbx');
 	define('DB_DATABASE_QSTAT', 'qstatslite');

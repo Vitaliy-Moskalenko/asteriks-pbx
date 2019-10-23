@@ -9,7 +9,7 @@ class DbCDRHandler {
 	private static function _getHandler() {
 		if(!isset(self::$_mHandler)){				
 			try{
-				//Create new PDO object
+				// Create new PDO object
 				self::$_mHandler = new PDO(PDO_DSN_PBX,
 										   DB_USERNAME,
 										   DB_PASSWORD,
@@ -19,7 +19,7 @@ class DbCDRHandler {
 												)
 										   );
 											
-					//Set PDO to throw exceptions
+					// Set PDO to throw exceptions
 					self::$_mHandler->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);					
 				}
 				catch(PDOException $e){
@@ -36,12 +36,12 @@ class DbCDRHandler {
 
 	public static function execute($sqlQuery, $params = NULL){
 		try{
-			$database_handler = self::_getHandler();                    //Get DB handler
-			$statement_handler = $database_handler->prepare($sqlQuery); //Prepare qry. to execute
-			$statement_handler->execute($params);                       //Execute query
+			$database_handler = self::_getHandler();                    // Get DB handler
+			$statement_handler = $database_handler->prepare($sqlQuery); // Prepare qry. to execute
+			$statement_handler->execute($params);                       // Execute query
 		}
 		catch(PDOException $e){
-				self::close();                                          //Close handler and generate error
+				self::close();                                          // Close handler and generate error
 				trigger_error($e->getMessage(), E_USER_ERROR);
 		}
 	}
@@ -93,5 +93,26 @@ class DbCDRHandler {
 		}
 		
 			return $result;		
-	}		
+	}	
+
+	public static function callProcedure($procName, $params = NULL) {
+		
+		try {   
+			
+			$sql = 'CALL '.$procName.'()';   			
+			
+			$database_handler = self::_getHandler();			
+			
+			$q = $database_handler->query($sql);  // Procedure call
+			$q->setFetchMode(PDO::FETCH_ASSOC);
+			
+		} catch (PDOException $e) {
+			die("Proc Call error occurred:" . $e->getMessage());
+		}
+		
+		
+		
+	}
+
+	
 }

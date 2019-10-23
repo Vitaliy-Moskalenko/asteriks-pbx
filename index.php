@@ -3,13 +3,11 @@
 	require 'config.php';
 	require 'init.php';	
 	require 'include/header.php';
-	
-		// echo '<pre>'; exit(var_dump($res));
 
 ?>
 
 <div class="main-header pricing-header px-3 py-3 pt-md-4 pb-md-4 mx-auto text-center">
-  <h1 class="display-4">Статистика PBX</h1>
+  <h1 class="display-4">Статистика PBX v.1.02</h1>
   <h2>Отчет по звонкам, данные из таблицы CDR</h2>
 </div>
 

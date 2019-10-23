@@ -38,7 +38,7 @@ GROUP by `dst`";
 }
 
 
-function task2($params = null) {	
+function task2($params = null) {
 	
 	$sql = "SELECT `dst`, COUNT(`dst`) AS `sum_calls` 
 FROM `cdr` 
@@ -113,7 +113,11 @@ GROUP BY `queuename`";
 	return $out;	
 }
 
-function task4($params = null) {
+function task4($params = null) {  // exit(var_dump($params));
+
+	$res = DbCDRHandler::callProcedure('worktime_agent');
+	
+	exit(var_dump($res));
 	
 	$sql = "SELECT `src`, COUNT(`src`) AS `sum_calls` 
 FROM `cdr` 
@@ -121,7 +125,7 @@ JOIN `extension_plan` ON `cdr`.`dst`=`extension_plan`.`number`
 WHERE `calldate` > '".$params['start-date']."' AND `calldate` < '".$params['end-date']."' AND `dst` = '".$params['number']."' AND `src` > 7 
 GROUP BY `src`";
 	
-	$res = DbCDRHandler::getAll($sql);
+	// $res = DbCDRHandler::getAll($sql);
 	
 	$out = '<div class="pricing-header px-3 py-3 pt-md-4 pb-md-4 mx-auto text-center" data-task="task4" id="interval">
 				<span id="interval-start-date">'.$params['start-date'].'</span> - 
