@@ -71,7 +71,9 @@ GROUP BY `dst`";
 	} 	
 
 	$writer = new Xlsx($spreadsheet);
-	$writer->save('Summary2_'.preg_replace('/[ :]/ui', '_', $_POST['start-date']).'-'.preg_replace('/[ :]/ui', '_', $_POST['end-date']).'.xlsx'); 
+	$outfile = 'Summary2_'.preg_replace('/[ :]/ui', '_', $_POST['start-date']).'-'.preg_replace('/[ :]/ui', '_', $_POST['end-date']).'.xlsx';
+	
+	$writer->save($outfile); 
 	
 	echo 'Xlsx document created successfully!';
 	

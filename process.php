@@ -6,8 +6,6 @@
 	require 'class/DbCDRHandler.class.php';
 	require 'class/DbQStatHandler.class.php';
 	require 'functions.php';
-	
-	// echo '<pre>'; print_r($_POST);
 
 	$taskId = (int)$_POST['form-id'];
 	
@@ -55,7 +53,9 @@ $(document).ready(function() {
 		var task      = $('#interval').data('task');
 		var startDate = $('#interval-start-date').text();
 		var endDate   = $('#interval-end-date').text();
-
+		
+		var filename = 'Summary_' + startDate.replace(/(\u003A| )/g, '_') + '_' + endDate.replace(/(\u003A| )/g, '_') + '.xlsx';
+		
 		var params = { 
 			'task'       : task,
 			'start-date' : startDate,
@@ -77,6 +77,17 @@ $(document).ready(function() {
 				alert(xhr.status); alert(thrownError); 
 			},
 		});
+		
+		setTimeout(function() {
+			var encodedUri = encodeURI(filename);
+			var link = document.createElement("a");
+			link.setAttribute("href", encodedUri);
+			link.setAttribute("download", filename);
+			document.body.appendChild(link);
+
+			link.click();
+			link.parentNode.removeChild(link);
+		}, 1000);
 	
 		return false;
 	});	
