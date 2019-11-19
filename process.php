@@ -45,19 +45,19 @@ $(document).ready(function() {
 	
 	
 	// Ajax call to import Excel file2
-	$('#exls-export').click(function() {
+	$('#exls-export').click(function() {  
 		
 		var task      = $('#interval').data('task');
 		var startDate = $('#interval-start-date').text();
-		var endDate   = $('#interval-end-date').text();
+		var endDate   = $('#interval-end-date').text();  
 		
-		var filename = 'Summary_' + startDate.replace(/(\u003A| )/g, '_') + '_' + endDate.replace(/(\u003A| )/g, '_') + '.xlsx';
+		var filename = 'Summary-' + startDate.replace(/(\u003A| )/g, '-') + '-' + endDate.replace(/(\u003A| )/g, '-') + '.xlsx'; 
 		
 		var params = { 
 			'task'       : task,
 			'start-date' : startDate,
 			'end-date'   : endDate			
-		};
+		};		
 		
 		$.ajax({
 			type: 'POST',
@@ -75,8 +75,6 @@ $(document).ready(function() {
 			},
 		});
 		
-		 
-		
 		setTimeout(function() {
 			var encodedUri = encodeURI(filename);  
 			var link = document.createElement("a");
@@ -86,7 +84,7 @@ $(document).ready(function() {
 
 			link.click();
 			link.parentNode.removeChild(link);
-		}, 3000);
+		}, 2000);
 	
 		return false;
 	});	

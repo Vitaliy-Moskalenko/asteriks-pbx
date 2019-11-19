@@ -4,18 +4,19 @@ require 'config.php';
 require 'class/DbCDRHandler.class.php';
 require 'vendor/autoload.php';
 
-use PhpOffice\PhpSpreadsheet\Spreadsheet;
-use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
-use PhpOffice\PhpSpreadsheet\Style\{Font, Border, Alignment};
+use PhpOffice\PhpSpreadsheet\Spreadsheet; 
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;  
+// use PhpOffice\PhpSpreadsheet\Style\{Font, Border, Alignment};
+use PhpOffice\PhpSpreadsheet\Style;    
 
 	$spreadsheet = new Spreadsheet();
-	$sheet = $spreadsheet->getActiveSheet();
+	$sheet = $spreadsheet->getActiveSheet(); 
 	
 	$sheet->getColumnDimension('B')->setWidth(50);
 	$sheet->getColumnDimension('C')->setWidth(50);
-	$sheet->getStyle('A1:C1')->getFill()->getStartColor()->setARGB('cccccc');
+	$sheet->getStyle('A1:C1')->getFill()->getStartColor()->setARGB('cccccc');  
 	
-	$sheet->getStyle('A1:C1')->applyFromArray([
+	/* $sheet->getStyle('A1:C1')->applyFromArray([
 		'font' => [
 			'name' => 'Arial',
 			'bold' => true,
@@ -30,9 +31,11 @@ use PhpOffice\PhpSpreadsheet\Style\{Font, Border, Alignment};
 			'vertical' => Alignment::VERTICAL_CENTER,
 			'wrapText' => true,
 		]
-	]);
+	]); */     
 	
 
+	
+	
 	switch($_POST['task']) { 
 	    case 'task1':  $output = saveXls1(); break;
 	    case 'task2':  $output = saveXls2(); break;
@@ -42,7 +45,7 @@ use PhpOffice\PhpSpreadsheet\Style\{Font, Border, Alignment};
 		default: $output = '<p style="color:red;">Failed to get params</p>';
 	}
 	
-	
+
 
 function saveXls1() {
 
@@ -106,11 +109,14 @@ GROUP BY `dst`";
 	} 	
 
 	$writer = new Xlsx($spreadsheet);
-	$outfile = 'Summary_'.preg_replace('/[ :]/ui', '_', $_POST['start-date']).'-'.preg_replace('/[ :]/ui', '_', $_POST['end-date']).'.xlsx';
+	$outfile = 'Summary-'.preg_replace('/[ :]/ui', '-', $_POST['start-date']).'-'.preg_replace('/[ :]/ui', '-', $_POST['end-date']).'.xlsx';
 	
-	$writer->save($outfile); 
+	$writer->save($outfile);
 	
-	echo 'Документ Эксель создан успешно!';
+	if(!$writer->save($outfile))
+		echo '<span style="color:red;">Ошибка сохранения файла!</span>';
+	else
+		echo 'Документ Эксель создан успешно!';
 	
 }
 
@@ -197,9 +203,7 @@ GROUP BY `src`";
 
 	$counter = 0;
 	
-	$sheet->setCellValue('A1', '№ п/п');
-	$sheet->setCellValue('B1', 'Телефонная линия');
-	$sheet->setCellValue('C1', 'Кол-во звонков');	
+	
 	
 	foreach($res as $resItem) {
 		
