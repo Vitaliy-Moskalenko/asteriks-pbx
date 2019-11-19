@@ -16,9 +16,9 @@ GROUP by `dst`";
 			</div>
 	<table id="result-table" class="table table-striped table-bordered table-sm"><thead>
     <tr>
-      <th scope="col">#</th>
-      <th scope="col">Dst</th>
-      <th scope="col">Touches</th>
+      <th scope="col">№ п/п</th>
+      <th scope="col">Телефонная линия</th>
+      <th scope="col">Кол-во звонков</th>
     </tr></thead>';
 	
 	$counter = 0;	
@@ -54,9 +54,9 @@ GROUP BY `dst`";
 			</div>
 	<table id="result-table" class="table table-striped table-bordered table-sm"><thead>
     <tr>
-      <th scope="col">#</th>
-      <th scope="col">Dst</th>
-      <th scope="col">Sum Calls</th>
+      <th scope="col">№ п/п</th>
+      <th scope="col">Телефонная линия</th>
+      <th scope="col">Количество звонков</th>
     </tr></thead>';
 	
 	$counter = 0;	
@@ -92,9 +92,9 @@ GROUP BY `queuename`";
 			</div>
 	<table id="result-table" class="table table-striped table-bordered table-sm"><thead>
     <tr>
-      <th scope="col">#</th>
-      <th scope="col">queuename</th>
-      <th scope="col">Sum Calls</th>
+      <th scope="col">№ п/п</th>
+      <th scope="col">Очередь</th>
+      <th scope="col">Количество звонков</th>
     </tr></thead>';
 	
 	$counter = 0;	
@@ -133,9 +133,9 @@ GROUP BY `src`";
 			</div>
 	<table id="result-table" class="table table-striped table-bordered table-sm"><thead>
     <tr>
-      <th scope="col">#</th>
-      <th scope="col">src</th>
-      <th scope="col">Sum Calls</th>
+      <th scope="col">№ п/п</th>
+      <th scope="col">Источник</th>
+      <th scope="col">Количество звонков</th>
     </tr></thead>';
 	
 	$counter = 0;	
@@ -170,9 +170,9 @@ GROUP BY `src`";
 			</div>
 	<table id="result-table" class="table table-striped table-bordered table-sm"><thead>
     <tr>
-      <th scope="col">#</th>
-      <th scope="col">src</th>
-      <th scope="col">Sum Calls</th>
+      <th scope="col">№ п/п</th>
+      <th scope="col">Источник</th>
+      <th scope="col">Количество звонков</th>
     </tr></thead>';
 	
 	$counter = 0;	
@@ -202,7 +202,7 @@ function getTestResult($params = null) {
 	
 	$res = '<table class="table table-striped"><thead>
     <tr>
-      <th scope="col">#</th>
+      <th scope="col">№ п/п</th>
       <th scope="col">First</th>
       <th scope="col">Last</th>
     </tr></thead>';

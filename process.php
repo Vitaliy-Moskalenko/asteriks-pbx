@@ -20,8 +20,6 @@
 	
 require 'include/header.php';
 
-
-
 ?>
 
 
@@ -37,7 +35,6 @@ require 'include/header.php';
 
 
 <?php require 'include/footer.php'; ?>
-
 
 <script>
 $(document).ready(function() {
@@ -71,15 +68,17 @@ $(document).ready(function() {
 				$('.success-msg').html(data);
 				setTimeout(function() {
 					$('.success-msg').animate({'opacity':'0'}, 500);
-				}, 15000)
+				}, 3000)
 			},
 			error: function (xhr, ajaxOptions, thrownError) {
 				alert(xhr.status); alert(thrownError); 
 			},
 		});
 		
+		 
+		
 		setTimeout(function() {
-			var encodedUri = encodeURI(filename);
+			var encodedUri = encodeURI(filename);  
 			var link = document.createElement("a");
 			link.setAttribute("href", encodedUri);
 			link.setAttribute("download", filename);
@@ -87,7 +86,7 @@ $(document).ready(function() {
 
 			link.click();
 			link.parentNode.removeChild(link);
-		}, 1000);
+		}, 3000);
 	
 		return false;
 	});	

@@ -6,6 +6,32 @@ require 'vendor/autoload.php';
 
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
+use PhpOffice\PhpSpreadsheet\Style\{Font, Border, Alignment};
+
+	$spreadsheet = new Spreadsheet();
+	$sheet = $spreadsheet->getActiveSheet();
+	
+	$sheet->getColumnDimension('B')->setWidth(50);
+	$sheet->getColumnDimension('C')->setWidth(50);
+	$sheet->getStyle('A1:C1')->getFill()->getStartColor()->setARGB('cccccc');
+	
+	$sheet->getStyle('A1:C1')->applyFromArray([
+		'font' => [
+			'name' => 'Arial',
+			'bold' => true,
+		],
+		'borders' => [
+			'allBorders' => [
+				'borderStyle' => Border::BORDER_THIN,
+			],
+		],
+		'alignment' => [
+			'horizontal' => Alignment::HORIZONTAL_CENTER,
+			'vertical' => Alignment::VERTICAL_CENTER,
+			'wrapText' => true,
+		]
+	]);
+	
 
 	switch($_POST['task']) { 
 	    case 'task1':  $output = saveXls1(); break;
@@ -14,8 +40,9 @@ use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 	    case 'task4':  $output = saveXls4(); break;
 	    case 'task5':  $output = saveXls5(); break;
 		default: $output = '<p style="color:red;">Failed to get params</p>';
-	}	
-
+	}
+	
+	
 
 function saveXls1() {
 
@@ -27,11 +54,15 @@ GROUP by `dst`";
 		
 	$res = DbCDRHandler::getAll($sql);	
 	
-	$spreadsheet = new Spreadsheet();
-	$sheet = $spreadsheet->getActiveSheet();
-
-	$counter = 0;
+	global $spreadsheet;
+	global $sheet;
 	
+	$sheet->setCellValue('A1', '№ п/п');
+	$sheet->setCellValue('B1', 'Телефонная линия');
+	$sheet->setCellValue('C1', 'Кол-во звонков');
+
+	$counter = 1;
+		
 	foreach($res as $resItem) {
 		
 		$sheet->setCellValue('A'.++$counter, $counter);
@@ -41,7 +72,7 @@ GROUP by `dst`";
 	} 	
 
 	$writer = new Xlsx($spreadsheet);
-	$writer->save('Summary1_'.preg_replace('/[ :]/ui', '_', $_POST['start-date']).'-'.preg_replace('/[ :]/ui', '_', $_POST['end-date']).'.xlsx'); 
+	$writer->save('Summary_'.preg_replace('/[ :]/ui', '_', $_POST['start-date']).'-'.preg_replace('/[ :]/ui', '_', $_POST['end-date']).'.xlsx'); 
 	
 	echo 'Xlsx document created successfully!';	
 	
@@ -57,10 +88,14 @@ GROUP BY `dst`";
 
 	$res = DbCDRHandler::getAll($sql);
 	
-	$spreadsheet = new Spreadsheet();
-	$sheet = $spreadsheet->getActiveSheet();
+	global $spreadsheet;
+	global $sheet;
 
-	$counter = 0;
+	$counter = 1;
+	
+	$sheet->setCellValue('A1', '№ п/п');
+	$sheet->setCellValue('B1', 'Телефонная линия');
+	$sheet->setCellValue('C1', 'Кол-во звонков');
 	
 	foreach($res as $resItem) {
 		
@@ -71,11 +106,11 @@ GROUP BY `dst`";
 	} 	
 
 	$writer = new Xlsx($spreadsheet);
-	$outfile = 'Summary2_'.preg_replace('/[ :]/ui', '_', $_POST['start-date']).'-'.preg_replace('/[ :]/ui', '_', $_POST['end-date']).'.xlsx';
+	$outfile = 'Summary_'.preg_replace('/[ :]/ui', '_', $_POST['start-date']).'-'.preg_replace('/[ :]/ui', '_', $_POST['end-date']).'.xlsx';
 	
 	$writer->save($outfile); 
 	
-	echo 'Xlsx document created successfully!';
+	echo 'Документ Эксель создан успешно!';
 	
 }
 
@@ -89,10 +124,14 @@ GROUP BY `queuename`";
 
 	$res = DbCDRHandler::getAll($sql);
 	
-	$spreadsheet = new Spreadsheet();
-	$sheet = $spreadsheet->getActiveSheet();
+	global $spreadsheet;
+	global $sheet;
 
 	$counter = 0;
+	
+	$sheet->setCellValue('A1', '№ п/п');
+	$sheet->setCellValue('B1', 'Очередь');
+	$sheet->setCellValue('C1', 'Кол-во звонков');	
 	
 	foreach($res as $resItem) {
 		
@@ -103,7 +142,7 @@ GROUP BY `queuename`";
 	} 	
 
 	$writer = new Xlsx($spreadsheet);
-	$writer->save('Summary3_'.preg_replace('/[ :]/ui', '_', $_POST['start-date']).'-'.preg_replace('/[ :]/ui', '_', $_POST['end-date']).'.xlsx'); 
+	$writer->save('Summary_'.preg_replace('/[ :]/ui', '_', $_POST['start-date']).'-'.preg_replace('/[ :]/ui', '_', $_POST['end-date']).'.xlsx'); 
 	
 	echo 'Xlsx document created successfully!';	
 	
@@ -117,11 +156,16 @@ JOIN `extension_plan` ON `cdr`.`dst`=`extension_plan`.`number`
 WHERE `calldate` > '".$_POST['start-date']."' AND `calldate` < '".$_POST['end-date']."' AND `dst` = '".$params['number']."' AND `src` > 7 
 GROUP BY `src`";
 	
-	$res = DbCDRHandler::getAll($sql);	
-	$spreadsheet = new Spreadsheet();
-	$sheet = $spreadsheet->getActiveSheet();
+	$res = DbCDRHandler::getAll($sql);
+	
+	global $spreadsheet;
+	global $sheet;
 
 	$counter = 0;
+	
+	$sheet->setCellValue('A1', '№ п/п');
+	$sheet->setCellValue('B1', 'Телефонная линия');
+	$sheet->setCellValue('C1', 'Кол-во звонков');	
 	
 	foreach($res as $resItem) {
 		
@@ -132,7 +176,7 @@ GROUP BY `src`";
 	} 	
 
 	$writer = new Xlsx($spreadsheet);
-	$writer->save('Summary4_'.preg_replace('/[ :]/ui', '_', $_POST['start-date']).'-'.preg_replace('/[ :]/ui', '_', $_POST['end-date']).'.xlsx'); 
+	$writer->save('Summary_'.preg_replace('/[ :]/ui', '_', $_POST['start-date']).'-'.preg_replace('/[ :]/ui', '_', $_POST['end-date']).'.xlsx'); 
 	
 	echo 'Xlsx document created successfully!';		
 	
@@ -148,11 +192,14 @@ GROUP BY `src`";
 	
 	$res = DbCDRHandler::getAll($sql);	
 	
-	$res = DbCDRHandler::getAll($sql);	
-	$spreadsheet = new Spreadsheet();
-	$sheet = $spreadsheet->getActiveSheet();
+	global $spreadsheet;
+	global $sheet;
 
 	$counter = 0;
+	
+	$sheet->setCellValue('A1', '№ п/п');
+	$sheet->setCellValue('B1', 'Телефонная линия');
+	$sheet->setCellValue('C1', 'Кол-во звонков');	
 	
 	foreach($res as $resItem) {
 		
@@ -163,7 +210,7 @@ GROUP BY `src`";
 	} 	
 
 	$writer = new Xlsx($spreadsheet);
-	$writer->save('Summary5_'.preg_replace('/[ :]/ui', '_', $_POST['start-date']).'-'.preg_replace('/[ :]/ui', '_', $_POST['end-date']).'.xlsx'); 
+	$writer->save('Summary_'.preg_replace('/[ :]/ui', '_', $_POST['start-date']).'-'.preg_replace('/[ :]/ui', '_', $_POST['end-date']).'.xlsx'); 
 	
 	echo 'Xlsx document created successfully!';		
 	

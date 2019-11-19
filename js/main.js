@@ -2,11 +2,13 @@ jQuery('document').ready(function() {
 
 	$('.start-date').datetimepicker({
 		format:'Y-m-d H:i:s',
+		defaultTime:'00:00',
 		lang:'ru',
 	});
 	
 	$('.end-date').datetimepicker({
 		format:'Y-m-d H:i:s',
+		defaultTime:'23:59',
 		lang:'ru',
 	});
 	
